@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Shop Classic Haircuts</title>
+    <!-- Incluir Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'barber-dark': '#1A1A1A',
+                        // Accent Color to Bright Gold (#FFD700)
+                        'barber-accent': '#FFD700', 
+                        // Hover Color for the accent
+                        'barber-hover': '#C0A000',
+                        'barber-light': '#F5F5F5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        // Use Playfair Display for a classic, elegant style
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+        
+        /* Ensures the carousel container is the reference point */
+        #carousel-container {
+            position: relative;
+        }
+        /* Ensures images inside the carousel are absolutely positioned */
+        #carousel-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* APPLIED STYLE: Gold Color for titles (no dark outline) */
+        .gold-text-shadow {
+            color: #FFD700; /* Gold color */
+            /* Text shadow for a subtle glow */
+            text-shadow: 
+                 0 0 10px rgba(255, 215, 0, 0.7); 
+        }
+
+        /* * Classic Form Input Style:
+        * - Dark background (#1A1A1A)
+        * - 1.5px soft gold border (#d4af37)
+        * - Rounded corners (rounded-xl)
+        * - White text
+        * - Gray placeholder
+        */
+        .form-input-classic {
+            /* Apply base input properties */
+            @apply w-full p-3 text-lg transition duration-200; 
+            
+            /* Background, Border, and Rounding */
+            background-color: #1A1A1A; /* Same as barber-dark */
+            border: 1.5px solid #d4af37; /* Soft gold border */
+            border-radius: 0.75rem; /* rounded-xl (12px) */
+
+            /* Text colors */
+            color: white; 
+            
+            /* Focus style */
+            @apply focus:outline-none focus:ring-1 focus:ring-barber-accent/80;
+        }
+
+        /* Specific style for the Placeholder (requires native CSS) */
+        .form-input-classic::placeholder {
+            color: #c7c7c7; /* Light gray */
+            opacity: 1; /* Necessary for Firefox */
+        }
+        
+        /* Adjustment for the Select: Maintains input style and adds a gold arrow */
+        #servicio {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            /* SVG of a down arrow in gold */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23d4af37'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        /* Ensure textarea uses the same rounding */
+        #mensaje {
+             border-radius: 0.75rem; /* rounded-xl (12px) */
+        }
+    </style>
+</head>
+<body class="font-sans bg-barber-dark text-barber-light antialiased">
+
+    <!-- HERO / CAROUSEL SECTION --><section id="carousel-container" class="w-full h-screen overflow-hidden">
+        
+        <!-- Carousel Images Container --><div id="carousel-images" class="w-full h-full">
+            <!-- IMAGE 1 (Initially visible) --><img src="https://i.imgur.com/iuanvcC.jpeg" alt="[Image of Barbershop Interior]" 
+                 class="object-cover transition-opacity duration-1000 opacity-100 z-10"
+                 onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/444/fff?text=Barberia+1'">
+            
+            <!-- IMAGE 2 --><img src="https://i.imgur.com/VdIV3eS.jpeg" alt="" 
+                 class="object-cover transition-opacity duration-1000 opacity-0 z-0"
+                 onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/444/fff?text=Barberia+2'">
+            
+            <!-- IMAGE 3 --><img src="https://i.imgur.com/Yc5sjLz.jpeg" alt="" 
+                 class="object-cover transition-opacity duration-1000 opacity-0 z-0"
+                 onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/444/fff?text=Barberia+3'">
+            
+            <!-- IMAGE 4 --><img src="https://i.imgur.com/njfFAdf.jpeg" alt="[Image of Barber Tools]" 
+                 class="object-cover transition-opacity duration-1000 opacity-0 z-0"
+                 onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/444/fff?text=Barberia+4'">
+        </div>
+        
+        <!-- Overlay with Title and Branding --><div class="absolute inset-0 bg-barber-dark bg-opacity-40 flex items-center justify-center">
+            <div class="text-center p-6 z-20">
+                <!-- Title with the new serif typography and gold/shadow effect --><h1 class="text-6xl sm:text-7xl lg:text-8xl font-serif font-extrabold leading-tight mb-4 tracking-tighter gold-text-shadow">
+                    Barber Shop
+                </h1>
+                <p class="text-2xl sm:text-3xl font-light text-barber-light mb-8 drop-shadow-lg">
+                    Classic Haircuts - The art of traditional shaving.
+                </p>
+                <!-- CTA Button with gold background and dark text for contrast --><a href="#servicios" class="inline-block bg-barber-accent text-barber-dark text-xl font-bold py-3 px-10 rounded-lg shadow-2xl transition duration-300 transform hover:scale-105 hover:bg-barber-hover">
+                    View Services
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- PERSUASIVE TEXT SECTION (About Us) --><section id="sobre-nosotros" class="py-16 md:py-24 px-6 bg-barber-dark">
+        <div class="max-w-4xl mx-auto text-center">
+            
+            <h2 class="text-4xl sm:text-5xl font-serif font-bold mb-4 gold-text-shadow uppercase">
+                THE ELEGANCE OF CLASSIC ARTISTRY
+            </h2>
+            
+            <p class="text-xl sm:text-2xl font-light text-barber-light mb-8">
+                More than a haircut, a timeless style statement.
+            </p>
+
+            <div class="border-y-2 border-barber-accent py-6">
+                <p class="text-lg leading-relaxed text-barber-light/80">
+                    At Eden Barber Shop, we revive the tradition of the artisan barber. Every visit is a meticulous ritual, where the precision of the straight razor merges with timeless elegance. Our cuts are not just impeccable; they are works of art designed to enhance your best version. Let us transform your style with the quality and attention only a classic can offer.
+                </p>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- SERVICES AND PRICING SECTION --><section id="servicios" class="py-16 md:py-24 px-6 bg-barber-dark">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-center text-4xl sm:text-5xl font-serif font-bold mb-12 gold-text-shadow uppercase">
+                Our Services
+            </h2>
+
+            <!-- Services Grid Container --><div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Service 1: Beard Grooming and Trimming --><div class="bg-[#242424] rounded-xl overflow-hidden shadow-2xl border border-barber-accent/30 transform hover:scale-[1.02] transition duration-300">
+                    <img src="https://i.imgur.com/QZTHbeO.jpeg" alt="" class="w-full h-56 object-cover">
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-serif font-bold mb-3 text-barber-accent uppercase">
+                            Beard Grooming and Trimming
+                        </h3>
+                        <p class="text-barber-light/90">
+                            A hot razor shave and the perfect contouring to define your style. We use premium oils and balms.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Service 2: Haircuts & Fade --><div class="bg-[#242424] rounded-xl overflow-hidden shadow-2xl border border-barber-accent/30 transform hover:scale-[1.02] transition duration-300">
+                    <img src="https://i.imgur.com/P1kTyhR.jpeg" alt="" class="w-full h-56 object-cover">
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-serif font-bold mb-3 text-barber-accent uppercase">
+                            Haircuts & Fade
+                        </h3>
+                        <p class="text-barber-light/90">
+                            From the classic 'Gentleman's Cut' to modern fades. Precision guaranteed in every line and texture.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Service 3: Hair Wash --><div class="bg-[#242424] rounded-xl overflow-hidden shadow-2xl border border-barber-accent/30 transform hover:scale-[1.02] transition duration-300">
+                    <img src="https://i.imgur.com/WQakgIT.jpeg" alt="" class="w-full h-56 object-cover">
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-serif font-bold mb-3 text-barber-accent uppercase">
+                            Hair Wash
+                        </h3>
+                        <p class="text-barber-light/90">
+                            A complete hair treatment with a head massage to prepare and relax. Includes premium products that strengthen your hair.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- CONTACT FORM AND MAP SECTION --><section id="contacto" class="py-16 md:py-24 px-6 bg-[#161616]">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-center text-4xl sm:text-5xl font-serif font-bold mb-12 gold-text-shadow uppercase">
+                Book Your Appointment
+            </h2>
+            <p class="text-center text-lg text-barber-light/80 mb-8">
+                Define your style today. Complete the form and we will contact you to confirm your time.
+            </p>
+
+            <form action="#" method="POST" class="space-y-6 bg-barber-dark p-8 md:p-12 rounded-xl shadow-2xl border border-barber-accent/50">
+                
+                <div>
+                    <label for="nombre" class="block text-barber-accent text-sm font-serif font-bold mb-2">Full Name</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Your Name" required class="form-input-classic">
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="telefono" class="block text-barber-accent text-sm font-serif font-bold mb-2">Phone</label>
+                        <!-- CHANGED: Phone placeholder updated from (+52) to (+1) -->
+                        <input type="tel" id="telefono" name="telefono" placeholder="(+1) 123 456 7890" required class="form-input-classic">
+                    </div>
+                    <div>
+                        <label for="correo" class="block text-barber-accent text-sm font-serif font-bold mb-2">Email</label>
+                        <input type="email" id="correo" name="correo" placeholder="email@example.com" required class="form-input-classic">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="servicio" class="block text-barber-accent text-sm font-serif font-bold mb-2">Required Service</label>
+                    <select id="servicio" name="servicio" required class="form-input-classic">
+                        <option value="" disabled selected>Select a service</option>
+                        <option value="beard">Beard Grooming and Trimming</option>
+                        <option value="haircut">Haircuts & Fade</option>
+                        <option value="wash">Hair Wash</option>
+                        <option value="paquete">Full Package (Haircut + Beard)</option>
+                    </select>
+                </div>
+
+                <!-- Message Field -->
+                <div>
+                    <label for="mensaje" class="block text-barber-accent text-sm font-serif font-bold mb-2">Comments or Message (Optional)</label>
+                    <textarea id="mensaje" name="mensaje" rows="4" placeholder="Any special notes or preferences..." class="form-input-classic"></textarea>
+                </div>
+                
+                <div>
+                    <button type="submit" class="w-full bg-barber-accent text-barber-dark text-xl font-bold py-3 px-10 rounded-lg shadow-xl transition duration-300 transform hover:scale-[1.01] hover:bg-barber-hover uppercase font-serif">
+                        Book Now
+                    </button>
+                </div>
+            </form>
+
+            <!-- INTERACTIVE MAP SECTION -->
+            <div class="mt-12">
+                 <h3 class="text-center text-3xl font-serif font-bold mb-6 gold-text-shadow uppercase">
+                    Visit Us
+                </h3>
+                <p class="text-center text-lg text-barber-light/80 mb-6">
+                    Find us at: 300 Willow Rd Unit 102, Guelph, ON N1H 3T2
+                </p>
+                <!-- Google Maps Iframe -->
+                <iframe 
+                    src="https://maps.app.goo.gl/aTnqKR4vrStH8GoE7" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    class="rounded-xl shadow-2xl border border-barber-accent/50"
+                ></iframe>
+            </div>
+        </div>
+    </section>
+    
+    <!-- MISSION STATEMENT / ABOUT US SECTION (FINAL) -->
+    <!-- Added pb-24 to ensure content is not hidden by the fixed bottom bar on mobile -->
+    <section id="mission-statement" class="pt-16 md:pt-20 px-6 bg-barber-dark border-t border-barber-accent/30 pb-24">
+        <div class="max-w-4xl mx-auto text-center">
+            <h3 class="text-4xl font-serif font-bold mb-6 gold-text-shadow">
+                Our Philosophy
+            </h3>
+            
+            <p class="text-lg leading-relaxed text-barber-light/90 mb-6">
+                At Eden Barber Shop, we believe in more than just a haircut — we believe in creating a grooming experience that’s second to none. Established by Will Smith, a self-motivated and highly talented individual, our barbershop stands as a testament to passion, skill, and dedication.
+            </p>
+            
+            <p class="text-lg leading-relaxed text-barber-light/90 mb-6">
+                We specialize in delivering high-quality services tailored to every client’s unique style and personality. Whether you're looking for a fresh modern cut, a classic and timeless look, or expert beard grooming, our shop has you covered.
+            </p>
+            
+            <p class="text-xl font-medium leading-relaxed text-barber-accent mb-8 italic">
+                Our goal is to make you look and feel your absolute best. With meticulous attention to detail and a commitment to excellence, Eden Barber Shop is more than just a destination, it’s an experience that redefines personal care and grooming.
+            </p>
+
+            <p class="text-lg leading-relaxed text-barber-light/80">
+                Let us help you put your best face forward. Visit us today and experience the difference of top-tier craftsmanship and outstanding service.
+            </p>
+        </div>
+    </section>
+
+    <!-- FIXED NAVIGATION BAR (Mobile Only: md:hidden) -->
+    <div class="fixed bottom-0 left-0 w-full bg-barber-dark/95 backdrop-blur-sm shadow-2xl z-50 md:hidden p-2 border-t border-barber-accent/30">
+        <div class="flex justify-around items-center h-16">
+            
+            <!-- Button 1: Call (+1 226-979-6445) -->
+            <a href="tel:+12269796445" class="flex flex-col items-center justify-center text-xs text-barber-light hover:text-barber-accent transition duration-300 transform active:scale-95">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-barber-accent" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+                <span class="mt-1 font-bold">Call</span>
+            </a>
+
+            <!-- Button 2: Book -->
+            <a href="#contacto" class="flex flex-col items-center justify-center text-xs text-barber-light hover:text-barber-accent transition duration-300 transform active:scale-95">
+                <!-- Calendar/Form Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-barber-accent" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                </svg>
+                <span class="mt-1 font-bold">Book</span> 
+            </a>
+
+            <!-- Button 3: Map / Location -->
+            <a href="#contacto" class="flex flex-col items-center justify-center text-xs text-barber-light hover:text-barber-accent transition duration-300 transform active:scale-95">
+                <!-- Location Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-barber-accent" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                </svg>
+                <span class="mt-1 font-bold">Map</span>
+            </a>
+        </div>
+    </div>
+
+
+    <!-- Carousel Script --><script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carouselContainer = document.getElementById('carousel-images');
+            if (carouselContainer) {
+                const images = carouselContainer.querySelectorAll('img');
+                let currentIndex = 0;
+                const totalImages = images.length;
+                const intervalTime = 3000; // 3 seconds
+
+                const updateCarousel = () => {
+                    // Hide the current image and lower its z-index
+                    images[currentIndex].classList.remove('opacity-100', 'z-10');
+                    images[currentIndex].classList.add('opacity-0', 'z-0');
+                    
+                    // Calculate the next index
+                    currentIndex = (currentIndex + 1) % totalImages;
+                    
+                    // Show the new image and raise its z-index
+                    images[currentIndex].classList.remove('opacity-0');
+                    images[currentIndex].classList.add('opacity-100', 'z-10');
+                };
+
+                // Start the timer
+                setInterval(updateCarousel, intervalTime);
+            }
+        });
+    </script>
+    
+</body>
+</html>
